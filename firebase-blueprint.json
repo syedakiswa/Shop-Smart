@@ -1,0 +1,29 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A product being tracked for price comparison.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user who owns this product." },
+        "name": { "type": "string", "description": "The name of the product." },
+        "notes": { "type": "string", "description": "Optional notes about the product." },
+        "stores": {
+          "type": "array",
+          "description": "List of stores where the product is tracked."
+        },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the product was added." },
+        "cheapestPrice": { "type": "number", "description": "The current lowest price found." },
+        "cheapestStore": { "type": "string", "description": "The name of the store with the lowest price." },
+        "priceHistory": { "type": "array", "description": "History of the cheapest price over time." }
+      },
+      "required": ["userId", "name", "stores", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of products tracked by a specific user."
+    }
+  }
+}
